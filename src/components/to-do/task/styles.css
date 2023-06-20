@@ -1,0 +1,29 @@
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 12px;
+}
+.icon{
+    width: 30px;
+    height: 100%;
+    transition: 0.5s;
+}
+.icon:hover{
+    transform: scale(1.2);
+}
+.completed-task-icon{
+    fill: #4043C9;
+}
+.completed-task-icon:hover li{
+    background-color: #4043C9;
+}
+.delete-task-icon{
+    fill: red;
+}
+.task-title{
+    color: #4043C9;
+}

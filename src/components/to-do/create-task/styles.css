@@ -1,0 +1,16 @@
+#create-task-btn{
+    width: 100%;
+    height: 50px;
+    background-color: #E3E3E3;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    color: #4043C9;
+    font-weight: 600;
+    font-size: 1.3rem;
+    transition: 0.5s;
+}
+#create-task-btn:hover{
+    background-color: #4043C9;
+    border-color: #E3E3E3;
+    color: #E3E3E3;
+}
