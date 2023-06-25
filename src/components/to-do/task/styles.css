@@ -37,7 +37,7 @@ li{
     text-decoration: line-through;
     color: rgba(58, 58, 58, 0.54);
 }
-@media (width < 700px){
+@media (width < 1400px){
     .task-container{
         padding: 0 20px;
     }
