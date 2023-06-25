@@ -17,11 +17,11 @@ function App() {
     },
     {
       title: "buy the milk",
-      completed: true,
+      completed: false,
     },
     {
       title: "do the dishes",
-      completed: true,
+      completed: false,
     },
     {
       title: "cook dinner",
@@ -29,7 +29,7 @@ function App() {
     },
     {
       title: "clean the car",
-      completed: true,
+      completed: false,
     },
   ];
 
@@ -37,8 +37,8 @@ function App() {
 
   const [searchValue, setSearchValue] = useState('');
 
-  let totalTask = taskList.length
-  let taskCompleted = taskList.filter(task => !!task.completed).length
+  let totalTask = tasks.length
+  let taskCompleted = tasks.filter(task => !!task.completed).length
 
   const tasksSearched = tasks.filter(task => {
     const searchText = searchValue.toLowerCase();
@@ -47,16 +47,46 @@ function App() {
     return taskTitle.includes(searchText)
   })
 
-  let tasksContent;
+  function completeTask(taskTitle){
+    const taskIndex = tasks.findIndex(task => task.title === taskTitle)
 
+    if(taskIndex >= 0){
+      try{
+        const newTaskList = [...tasks]
+        newTaskList[taskIndex].completed = !newTaskList[taskIndex].completed
+        newTaskList.sort((task1, task2) => {
+          if(!task1.completed && task2.completed){
+            return -2
+          } else{
+            return 0
+          }
+        })
+        setTasks(newTaskList)
+      } catch(err){
+        console.log(err);
+      }
+    } else{
+      console.log("task not found")
+    }
+  }
+  
+  let tasksContent;
   if(searchValue === ''){
     tasksContent = tasks.map( task => (
-      <TodoTask title={task.title} key={task.title} completed={task.completed} />
+      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask}/>
     ))
   } else{
     tasksContent = tasksContent = tasksSearched.map( task => (
-      <TodoTask title={task.title} key={task.title} completed={task.completed} />
+      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask}/>
     ))
+  }
+
+  function taskOrTasks(){
+    if(totalTask > 1){
+      return 'tasks'
+    } else{
+      return 'task'
+    }
   }
 
   return (
@@ -67,7 +97,7 @@ function App() {
         <div className="child-1">
 
           <h1 id="title">Todo-List</h1>
-          <CompletedTaskCount completedTaskCount={taskCompleted} totalTaskCount={totalTask} />
+          <CompletedTaskCount completedTaskCount={taskCompleted} totalTaskCount={totalTask} taskOrTasks={taskOrTasks()}/>
           <Nav searchValue={searchValue} setSearchValue={setSearchValue} />
 
         </div>
