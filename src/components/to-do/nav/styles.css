@@ -37,3 +37,12 @@
 .input-search:focus::placeholder{
     color: #4042c9a2;
 }
+
+@media (width < 700px){
+    .input-search{
+        width: 100%;
+    }
+    .search-icon{
+        height: 30px;
+    }
+}
