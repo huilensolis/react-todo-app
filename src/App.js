@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 import "./App.css";
 
@@ -32,8 +33,31 @@ function App() {
     },
   ];
 
+  const [tasks, setTasks] = useState(taskList)
+
+  const [searchValue, setSearchValue] = useState('');
+
   let totalTask = taskList.length
-  let taskCompleted = taskList.filter(task => task.completed === true).length
+  let taskCompleted = taskList.filter(task => !!task.completed).length
+
+  const tasksSearched = tasks.filter(task => {
+    const searchText = searchValue.toLowerCase();
+    const taskTitle = task.title.toLowerCase();
+
+    return taskTitle.includes(searchText)
+  })
+
+  let tasksContent;
+
+  if(searchValue === ''){
+    tasksContent = tasks.map( task => (
+      <TodoTask title={task.title} key={task.title} completed={task.completed} />
+    ))
+  } else{
+    tasksContent = tasksContent = tasksSearched.map( task => (
+      <TodoTask title={task.title} key={task.title} completed={task.completed} />
+    ))
+  }
 
   return (
     // <React.Fragment>
@@ -44,7 +68,7 @@ function App() {
 
           <h1 id="title">Todo-List</h1>
           <CompletedTaskCount completedTaskCount={taskCompleted} totalTaskCount={totalTask} />
-          <Nav />
+          <Nav searchValue={searchValue} setSearchValue={setSearchValue} />
 
         </div>
 
@@ -58,9 +82,7 @@ function App() {
 
       <section className="task-section">
         <TaskList>
-          {taskList.map( task => (
-            <TodoTask title={task.title} key={task.title} />
-          ))}
+          {tasksContent}
         </TaskList>
       </section>
     </main>

@@ -21,9 +21,19 @@ li{
 .completed-task-icon:hover li{
     background-color: #4043C9;
 }
-.delete-task-icon{
-    fill: red;
-}
-.task-title{
+.task-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #4043C9;
+    width: 100%;
+}
+
+
+/* // completed task */
+
+.task-completed{
+    font-style: italic;
+    text-decoration: line-through;
+    color: rgba(58, 58, 58, 0.54);
 }
