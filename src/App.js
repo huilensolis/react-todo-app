@@ -69,11 +69,16 @@ function App() {
       console.log("task not found")
     }
   }
-  
+  function deleteTask(taskTitle){
+    const indexOfTask = tasks.findIndex(task => task.title === taskTitle)
+    const newTasksArray = [...tasks]
+    newTasksArray.splice(indexOfTask, 1)
+    setTasks(newTasksArray)
+  }
   let tasksContent;
   if(searchValue === ''){
     tasksContent = tasks.map( task => (
-      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask}/>
+      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask} deleteTaskFunction={deleteTask}/>
     ))
   } else{
     tasksContent = tasksContent = tasksSearched.map( task => (
