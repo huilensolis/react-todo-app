@@ -10,35 +10,22 @@ import { TodoTask } from "./components/to-do/task/task";
 import { CreateTaskBtn } from "./components/to-do/create-task/create-task";
 
 function App() {
-  let taskList = [
-    {
-      title: "take the dogs for a walk",
-      completed: false,
-    },
-    {
-      title: "buy the milk",
-      completed: false,
-    },
-    {
-      title: "do the dishes",
-      completed: false,
-    },
-    {
-      title: "cook dinner",
-      completed: false,
-    },
-    {
-      title: "clean the car",
-      completed: false,
-    },
-  ];
 
-  const [tasks, setTasks] = useState(taskList)
+  const [tasks, setTasks] = useState(() => {
+    const tasksFromLocalStorage = localStorage.getItem('tasks_V1')
+    if(tasksFromLocalStorage){
+      return JSON.parse(tasksFromLocalStorage)
+    } else{
+      return []
+    }
+  })
 
+  function saveTasksToLocalStorage(tasksArray){
+    window.localStorage.setItem('tasks_V1', JSON.stringify(tasksArray))
+  }
+
+  // search logic
   const [searchValue, setSearchValue] = useState('');
-
-  let totalTask = tasks.length
-  let taskCompleted = tasks.filter(task => !!task.completed).length
 
   const tasksSearched = tasks.filter(task => {
     const searchText = searchValue.toLowerCase();
@@ -47,11 +34,24 @@ function App() {
     return taskTitle.includes(searchText)
   })
 
+  let tasksContent;
+  if(searchValue === ''){
+    tasksContent = tasks.map( task => (
+      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask} deleteTaskFunction={deleteTask}/>
+    ))
+  } else{
+    tasksContent = tasksContent = tasksSearched.map( task => (
+      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask}/>
+    ))
+  }
+
+  let totalTask = tasks.length
+  let taskCompleted = tasks.filter(task => !!task.completed).length
+
   function completeTask(taskTitle){
     const taskIndex = tasks.findIndex(task => task.title === taskTitle)
 
     if(taskIndex >= 0){
-      try{
         const newTaskList = [...tasks]
         newTaskList[taskIndex].completed = !newTaskList[taskIndex].completed
         newTaskList.sort((task1, task2) => {
@@ -62,9 +62,7 @@ function App() {
           }
         })
         setTasks(newTaskList)
-      } catch(err){
-        console.log(err);
-      }
+        saveTasksToLocalStorage(newTaskList)
     } else{
       console.log("task not found")
     }
@@ -74,16 +72,7 @@ function App() {
     const newTasksArray = [...tasks]
     newTasksArray.splice(indexOfTask, 1)
     setTasks(newTasksArray)
-  }
-  let tasksContent;
-  if(searchValue === ''){
-    tasksContent = tasks.map( task => (
-      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask} deleteTaskFunction={deleteTask}/>
-    ))
-  } else{
-    tasksContent = tasksContent = tasksSearched.map( task => (
-      <TodoTask title={task.title} key={task.title} completed={task.completed} completeTaskFunction={completeTask}/>
-    ))
+    saveTasksToLocalStorage(newTasksArray)
   }
 
   function taskOrTasks(){
