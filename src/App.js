@@ -3,6 +3,10 @@ import { useState } from "react";
 
 import "./App.css";
 
+// custom hooks
+import { useLocalStorage } from "./custom-hooks/index";
+
+// components
 import { CompletedTaskCount } from "./components/to-do/count/count";
 import { TaskList } from "./components/to-do/task-list/task-list";
 import { Nav } from "./components/to-do/nav/nav";
@@ -11,27 +15,6 @@ import { CreateTaskBtn } from "./components/to-do/create-task/create-task";
 
 function App() {
   // tasks logic
-  function useLocalStorage(localStorageKey) {
-    const [items, setItems] = useState(() => {
-      const ItemsFromLocalStorage = localStorage.getItem(localStorageKey);
-
-      if (ItemsFromLocalStorage) {
-        return JSON.parse(ItemsFromLocalStorage);
-      }
-
-      return [];
-    });
-
-    function getItem() {
-      return items;
-    }
-
-    function saveItemsToLocalStorage(items) {
-      localStorage.setItem(localStorageKey, JSON.stringify(items));
-      setItems(items);
-    }
-    return { saveItemsToLocalStorage, getItem };
-  }
   const {
     getItem: getTasks,
     saveItemsToLocalStorage: saveTasksToLocalStorage,
@@ -58,7 +41,9 @@ function App() {
   }
 
   function deleteTask(taskTitle) {
-    const indexOfTask = getTasks().findIndex((task) => task.title === taskTitle);
+    const indexOfTask = getTasks().findIndex(
+      (task) => task.title === taskTitle
+    );
     const newTasksArray = [...getTasks()];
     newTasksArray.splice(indexOfTask, 1);
     saveTasksToLocalStorage(newTasksArray);
