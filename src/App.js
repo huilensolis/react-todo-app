@@ -62,26 +62,11 @@ function App() {
   let totalTask = getTasks().length;
   let taskCompleted = getTasks().filter((task) => !!task.completed).length;
 
-  let tasksContent;
+  let TaskArray;
   if (searchValue === "") {
-    tasksContent = getTasks().map((task) => (
-      <TodoTask
-        title={task.title}
-        key={task.title}
-        completed={task.completed}
-        completeTaskFunction={completeTask}
-        deleteTaskFunction={deleteTask}
-      />
-    ));
+    TaskArray = getTasks();
   } else {
-    tasksContent = tasksContent = tasksSearched.map((task) => (
-      <TodoTask
-        title={task.title}
-        key={task.title}
-        completed={task.completed}
-        completeTaskFunction={completeTask}
-      />
-    ));
+    TaskArray = tasksSearched;
   }
 
   function taskOrTasks() {
@@ -112,7 +97,19 @@ function App() {
       </section>
 
       <section className="task-section">
-        <TaskList>{tasksContent}</TaskList>
+        <TaskList>
+          {
+            TaskArray.map((task) => (
+              <TodoTask
+                title={task.title}
+                key={task.title}
+                completed={task.completed}
+                completeTaskFunction={completeTask}
+                deleteTaskFunction={deleteTask}
+              />
+            ))
+          }
+        </TaskList>
       </section>
     </main>
     // </React.Fragment>
