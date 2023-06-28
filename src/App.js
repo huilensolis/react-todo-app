@@ -1,17 +1,10 @@
-import React from "react";
 import { useState } from "react";
 
-import "./App.css";
+//app ui
+import { AppUi } from "./appUi";
 
 // custom hooks
 import { useLocalStorage } from "./hooks/index";
-
-// components
-import { CompletedTaskCount } from "./components/to-do/count/count";
-import { TaskList } from "./components/to-do/task-list/task-list";
-import { Nav } from "./components/to-do/nav/nav";
-import { TodoTask } from "./components/to-do/task/task";
-import { CreateTaskBtn } from "./components/to-do/create-task/create-task";
 
 function App() {
   // tasks logic
@@ -76,43 +69,16 @@ function App() {
       return "task";
     }
   }
-
   return (
-    // <React.Fragment>
-    <main className="main-container">
-      <section className="aside-section">
-        <div className="child-1">
-          <h1 id="title">Todo-List</h1>
-          <CompletedTaskCount
-            completedTaskCount={taskCompleted}
-            totalTaskCount={totalTask}
-            taskOrTasks={taskOrTasks()}
-          />
-          <Nav searchValue={searchValue} setSearchValue={setSearchValue} />
-        </div>
-
-        <div className="child-2">
-          <CreateTaskBtn class="createTaskBtn" />
-        </div>
-      </section>
-
-      <section className="task-section">
-        <TaskList>
-          {
-            TaskArray.map((task) => (
-              <TodoTask
-                title={task.title}
-                key={task.title}
-                completed={task.completed}
-                completeTaskFunction={completeTask}
-                deleteTaskFunction={deleteTask}
-              />
-            ))
-          }
-        </TaskList>
-      </section>
-    </main>
-    // </React.Fragment>
+    <AppUi
+      TaskArray={TaskArray}
+      totalTask={totalTask}
+      taskCompleted={taskCompleted}
+      completeTask={completeTask}
+      deleteTask={deleteTask}
+      taskOrTasks={taskOrTasks}
+      setSearchValue={setSearchValue}
+    />
   );
 }
 
