@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./App.css";
 
 // custom hooks
-import { useLocalStorage } from "./custom-hooks/index";
+import { useLocalStorage } from "./hooks/index";
 
 // components
 import { CompletedTaskCount } from "./components/to-do/count/count";
