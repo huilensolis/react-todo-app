@@ -1,5 +1,6 @@
 import "./styles.css";
 import { ReactComponent as MagnifyIcon }  from './../../../svg/fontawesome/magnify-icon/magnify.svg'
+
 function Nav({ setSearchValue }) {
   function serachTask(event) {
     const InputValue = event.target.value;

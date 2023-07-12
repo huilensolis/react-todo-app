@@ -1,20 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 //app ui
 import { AppUi } from "./appUi";
+
 // custom hooks
-import { useLocalStorage } from "./hooks/index";
-
+import { TaskContext } from "./components/to-do/contexts/task-context";
 function App() {
-  // tasks logic
   const {
-    getItem: getTasks,
-    saveItemsToLocalStorage: saveTasksToLocalStorage,
+    loading,
+    setLoading,
+    tasks,
+    setTasks,
+    totalTask,
+    taskCompleted,
+    searchValue,
+    setSearchValue,
+    emptyTodoList,
+    saveTasksToLocalStorage,
+    getTasks,
     getError,
-    setErrorState
-  } = useLocalStorage("tasks_V1");
+    setErrorState,
+  } = useContext(TaskContext);
 
-  function completeTask(taskTitle) {
-    const taskIndex = getTasks().findIndex((task) => task.title === taskTitle);
+  // tasks logic
+
+  function closeErrorTab() {
+    setErrorState(false);
+  }
+
+  function completeTask(id) {
+    const taskIndex = getTasks().findIndex((task) => task.id === id);
 
     if (taskIndex >= 0) {
       const newTaskList = [...getTasks()];
@@ -27,27 +41,23 @@ function App() {
         }
       });
       saveTasksToLocalStorage(newTaskList);
-      console.log(getTasks());
+      setTasks(newTaskList);
     } else {
       console.log("task not found");
     }
   }
 
-  function deleteTask(taskTitle) {
+  function deleteTask(id) {
     const indexOfTask = getTasks().findIndex(
       (task) => task.title === taskTitle
     );
     const newTasksArray = [...getTasks()];
     newTasksArray.splice(indexOfTask, 1);
     saveTasksToLocalStorage(newTasksArray);
+    setTasks(newTasksArray);
   }
 
-  let totalTask = getTasks().length;
-  let taskCompleted = getTasks().filter((task) => !!task.completed).length;
-
   // search logic
-  const [searchValue, setSearchValue] = useState("");
-
   const tasksSearched = getTasks().filter((task) => {
     const searchText = searchValue.toLowerCase();
     const taskTitle = task.title.toLowerCase();
@@ -55,26 +65,19 @@ function App() {
     return taskTitle.includes(searchText);
   });
 
-  let TaskArray = getTasks()
-
-  const [loading, setLoading] = useState(false)
-
   useEffect(() => {
-
-    setLoading(true)
+    setLoading(true);
 
     setTimeout(() => {
-      setLoading(false)
-      if(searchValue.length > 0){
-        TaskArray = tasksSearched;
+      setLoading(false);
+      if (searchValue.length > 0) {
+        setTasks(tasksSearched);
+      } else{
+        setTasks(getTasks())
       }
-    }, 2000);
-  }, [searchValue])
+    }, 1000);
+  }, [searchValue]);
 
-  const emptyTodoList = Array(5).fill(null)
-  function closeErrorTab(){
-    setErrorState(false)
-  }
   function taskOrTasks() {
     if (totalTask > 1) {
       return "tasks";
@@ -84,7 +87,7 @@ function App() {
   }
   return (
     <AppUi
-      TaskArray={TaskArray}
+      TaskArray={tasks}
       totalTask={totalTask}
       taskCompleted={taskCompleted}
       completeTask={completeTask}

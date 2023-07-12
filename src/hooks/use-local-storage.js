@@ -17,7 +17,6 @@ function useLocalStorage(localStorageKey) {
     return items;
   }
   
-
   function saveItemsToLocalStorage(items) {
     try{
       localStorage.setItem(localStorageKey, JSON.stringify(items));

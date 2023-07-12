@@ -8,6 +8,7 @@ import { TodoTask } from "./components/to-do/task/task";
 import { CreateTaskBtn } from "./components/to-do/create-task/create-task";
 import { EmptyTodo } from "./components/to-do/empty-todo/empty-todo";
 
+
 function AppUi({
   TaskArray,
   totalTask,
@@ -20,7 +21,7 @@ function AppUi({
   loading,
   emptyTodoList,
   getError,
-  closeErrorTab
+  closeErrorTab,
 }) {
   return (
     <main className="main-container">
@@ -51,10 +52,11 @@ function AppUi({
               There are no coincidences for "{searchValue}"
             </p>
           )}
-          {TaskArray.map((task) => (
+          {!loading && TaskArray.map((task) => (
             <TodoTask
               title={task.title}
-              key={task.title}
+              key={task.id}
+              id={task.id}
               completed={task.completed}
               completeTaskFunction={completeTask}
               deleteTaskFunction={deleteTask}

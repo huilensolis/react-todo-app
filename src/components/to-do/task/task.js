@@ -2,13 +2,13 @@ import "./styles.css";
 import { useState } from "react";
 import {CheckIcon, CloseIcon} from '../../../svg/bs/index'
 
-function TodoTask({ title, completed, completeTaskFunction, deleteTaskFunction }) {
+function TodoTask({ title, id, completed, completeTaskFunction, deleteTaskFunction }) {
 
   function setTaskCompleted() {
-    completeTaskFunction(title)
+    completeTaskFunction(id)
   }
   function deleteTask(){
-    deleteTaskFunction(title)
+    deleteTaskFunction(id)
   }
   const [isHovering, setIsHovering] = useState(null)
 
