@@ -49,7 +49,7 @@ function App() {
 
   function deleteTask(id) {
     const indexOfTask = getTasks().findIndex(
-      (task) => task.title === taskTitle
+      (task) => task.title === id
     );
     const newTasksArray = [...getTasks()];
     newTasksArray.splice(indexOfTask, 1);
