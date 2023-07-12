@@ -1,6 +1,8 @@
 import { useState } from "react";
-
+import { ErrorHandler } from "./index";
 function useLocalStorage(localStorageKey) {
+  const [getError, setErrorState] = new ErrorHandler()
+
   const [items, setItems] = useState(() => {
     const ItemsFromLocalStorage = localStorage.getItem(localStorageKey);
 
@@ -14,12 +16,17 @@ function useLocalStorage(localStorageKey) {
   function getItem() {
     return items;
   }
+  
 
   function saveItemsToLocalStorage(items) {
-    localStorage.setItem(localStorageKey, JSON.stringify(items));
-    setItems(items);
+    try{
+      localStorage.setItem(localStorageKey, JSON.stringify(items));
+      setItems(items);
+    } catch(error){
+      setErrorState('there has been an error saving your data, if the issue persist, contact us in email@example.com')
+    }
   }
-  return { saveItemsToLocalStorage, getItem };
+  return { saveItemsToLocalStorage, getItem, getError, setErrorState };
 }
 
 export { useLocalStorage }

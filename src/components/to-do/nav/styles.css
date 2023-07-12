@@ -16,15 +16,15 @@
 .input-search {
     width: 70%;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 5px;
     height: 100%;
     background-color: #4043C9;
     border: 2px solid #FFFFFF;
-    transition: 0.5s;
-}
-.input-search{
     color: white;
+    transition: 0.5s;
+    font-size: 1rem;
+    padding: 1rem;
 }
 .input-search::placeholder {
     color: rgba(255, 255, 255, 0.616);
@@ -36,6 +36,9 @@
 }
 .input-search:focus::placeholder{
     color: #4042c9a2;
+}
+.input-search:focus, .input-search:focus-visible{
+    outline: 2px solid skyblue;
 }
 
 @media (width < 1000px){

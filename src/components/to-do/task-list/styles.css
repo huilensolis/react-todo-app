@@ -3,3 +3,11 @@
     flex-direction: column;
     gap: 20px;
 }
+.no-task-found-error{
+    color: red;
+    width: 100%;
+    text-align: center;
+}
+.loading-text{
+    color: rgb(67, 67, 238);
+}

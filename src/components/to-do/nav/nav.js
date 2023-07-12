@@ -1,5 +1,5 @@
 import "./styles.css";
-import { ReactComponent as Magnify_icon }  from './../../../svg/fontawesome/magnify-icon/magnify.svg'
+import { ReactComponent as MagnifyIcon }  from './../../../svg/fontawesome/magnify-icon/magnify.svg'
 function Nav({ setSearchValue }) {
   function serachTask(event) {
     const InputValue = event.target.value;
@@ -8,7 +8,7 @@ function Nav({ setSearchValue }) {
 
   return (
     <nav className="task-nav">
-      < Magnify_icon className="search-icon" />
+      <MagnifyIcon className="search-icon" />
       <input
         type="text"
         className="input-search"
