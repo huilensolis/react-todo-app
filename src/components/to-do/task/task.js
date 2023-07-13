@@ -2,14 +2,43 @@ import "./styles.css";
 import { useState } from "react";
 import {CheckIcon, CloseIcon} from '../../../svg/bs/index'
 
-function TodoTask({ title, id, completed, completeTaskFunction, deleteTaskFunction }) {
+import { useContext } from "react";
+import { TaskContext } from "../contexts/task-context";
 
-  function setTaskCompleted() {
-    completeTaskFunction(id)
+function TodoTask({ title, id, completed }) {
+
+  const {getTasks, saveTasksToLocalStorage, setTasks} = useContext(TaskContext)
+
+  function completeTask(id) {
+    const taskIndex = getTasks().findIndex((task) => task.id === id);
+
+    if (taskIndex >= 0) {
+      const newTaskList = [...getTasks()];
+      newTaskList[taskIndex].completed = !newTaskList[taskIndex].completed;
+      newTaskList.sort((task1, task2) => {
+        if (!task1.completed && task2.completed) {
+          return -2;
+        } else {
+          return 0;
+        }
+      });
+      saveTasksToLocalStorage(newTaskList);
+      setTasks(newTaskList);
+    } else {
+      console.log("task not found");
+    }
   }
-  function deleteTask(){
-    deleteTaskFunction(id)
+
+  function deleteTask(id) {
+    const indexOfTask = getTasks().findIndex(
+      (task) => task.title === id
+    );
+    const newTasksArray = [...getTasks()];
+    newTasksArray.splice(indexOfTask, 1);
+    saveTasksToLocalStorage(newTasksArray);
+    setTasks(newTasksArray);
   }
+
   const [isHovering, setIsHovering] = useState(null)
 
   function handleMouseEnter(title){
@@ -23,7 +52,7 @@ function TodoTask({ title, id, completed, completeTaskFunction, deleteTaskFuncti
     <li className={isHovering === title ? "maybe-delete-background-red" : ""}>
       <CheckIcon 
         className="completed-task-icon icon"
-        onClick={()  => setTaskCompleted()}
+        onClick={()  => completeTask(id)}
       />
 
       <main className="task-container">
@@ -34,7 +63,7 @@ function TodoTask({ title, id, completed, completeTaskFunction, deleteTaskFuncti
         </h1>
       </main>
       <CloseIcon
-        className="delete-task-icon icon" onClick={deleteTask} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave} 
+        className="delete-task-icon icon" onClick={deleteTask(id)} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave} 
       />
     </li>
   );

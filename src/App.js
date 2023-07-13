@@ -10,7 +10,7 @@ function App() {
     setLoading,
     tasks,
     setTasks,
-    totalTask,
+    totalTasks,
     taskCompleted,
     searchValue,
     setSearchValue,
@@ -19,43 +19,10 @@ function App() {
     getTasks,
     getError,
     setErrorState,
+    setTaskCompleted
   } = useContext(TaskContext);
 
   // tasks logic
-
-  function closeErrorTab() {
-    setErrorState(false);
-  }
-
-  function completeTask(id) {
-    const taskIndex = getTasks().findIndex((task) => task.id === id);
-
-    if (taskIndex >= 0) {
-      const newTaskList = [...getTasks()];
-      newTaskList[taskIndex].completed = !newTaskList[taskIndex].completed;
-      newTaskList.sort((task1, task2) => {
-        if (!task1.completed && task2.completed) {
-          return -2;
-        } else {
-          return 0;
-        }
-      });
-      saveTasksToLocalStorage(newTaskList);
-      setTasks(newTaskList);
-    } else {
-      console.log("task not found");
-    }
-  }
-
-  function deleteTask(id) {
-    const indexOfTask = getTasks().findIndex(
-      (task) => task.title === id
-    );
-    const newTasksArray = [...getTasks()];
-    newTasksArray.splice(indexOfTask, 1);
-    saveTasksToLocalStorage(newTasksArray);
-    setTasks(newTasksArray);
-  }
 
   // search logic
   const tasksSearched = getTasks().filter((task) => {
@@ -78,29 +45,28 @@ function App() {
     }, 1000);
   }, [searchValue]);
 
-  function taskOrTasks() {
-    if (totalTask > 1) {
-      return "tasks";
-    } else {
-      return "task";
-    }
-  }
   return (
-    <AppUi
-      TaskArray={tasks}
-      totalTask={totalTask}
-      taskCompleted={taskCompleted}
-      completeTask={completeTask}
-      deleteTask={deleteTask}
-      taskOrTasks={taskOrTasks}
-      setSearchValue={setSearchValue}
-      searchValue={searchValue}
-      loading={loading}
-      emptyTodoList={emptyTodoList}
-      getError={getError}
-      closeErrorTab={closeErrorTab}
-    />
-  );
+    <TaskContext.Provider value={{
+      loading,
+      setLoading,
+      tasks,
+      setTasks,
+      totalTasks,
+      taskCompleted,
+      setTaskCompleted,
+      searchValue,
+      setSearchValue,
+      emptyTodoList,
+      saveTasksToLocalStorage,
+      getTasks,
+      getError,
+      setErrorState,
+    }}>
+      <AppUi
+        emptyTodoList={emptyTodoList}
+      />
+    </TaskContext.Provider>
+    );
 }
 
 export default App;

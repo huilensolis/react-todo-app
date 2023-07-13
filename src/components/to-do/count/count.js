@@ -1,22 +1,39 @@
-import './styles.css'
+import "./styles.css";
+import { TaskContext } from "../contexts/task-context";
+import { useContext } from "react";
 
-function CompletedTaskCount({completedTaskCount, totalTaskCount, taskOrTasks}) {
+function CompletedTaskCount() {
+  const { totalTask, taskCompleted } =
+    useContext(TaskContext);
 
-
-  let firstLineContent = 'You have completed'
-  let secondLineContent = `${completedTaskCount} of ${totalTaskCount} ${taskOrTasks}`
-
-  if(completedTaskCount === totalTaskCount && totalTaskCount > 0){
-    firstLineContent = 'Good job! 👏'
-    secondLineContent = 'You have completed all your tasks for today'
-  } else if(totalTaskCount === 0){
-    firstLineContent = 'it looks a kinda empty here 🐻'
-    secondLineContent = 'Try creating some new tasks!'
+  function taskOrTasks() {
+    if (totalTask > 1) {
+      return "tasks";
+    } else {
+      return "task";
+    }
   }
-  
   return (
-    <h1 className='count-h1'>{firstLineContent} <br /> <span> {secondLineContent} </span> </h1>
+    <>
+      <header>
+        {taskCompleted === totalTask && totalTask > 0 && (
+          <h1 className="count-h1">
+            Good job! 👏 <br /> You have completed all your tasks for today
+          </h1>
+        )}
+        {totalTask === 0 && (
+          <h1 className="count-h1">
+            it looks a kinda empty here 🐻 <br /> Try creating some new tasks!
+          </h1>
+        )}
+        {!taskCompleted === totalTask && !totalTask === 0 && (
+          <h1 className="count-h1">
+            you have compelte <br /> {taskCompleted} of {taskOrTasks()}
+          </h1>
+        )}
+      </header>
+    </>
   );
 }
 
-export {CompletedTaskCount}
+export { CompletedTaskCount };

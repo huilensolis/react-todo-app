@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useLocalStorage } from "../../../hooks";
+
 export const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
@@ -17,7 +18,7 @@ export function TaskProvider({ children }) {
       return [];
     }
   });
-  const [totalTask, setTotalTask] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
   const [taskCompleted, setTaskCompleted] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ export function TaskProvider({ children }) {
   useEffect(() => {
     if (tasks) {
       setTaskCompleted(tasks.filter((task) => task.completed).length);
-      setTotalTask(tasks.length);
+      setTotalTasks(tasks.length);
     }
   }, [tasks]);
 
@@ -37,8 +38,7 @@ export function TaskProvider({ children }) {
         setLoading,
         tasks,
         setTasks,
-        totalTask,
-        setTotalTask,
+        totalTasks,
         taskCompleted,
         setTaskCompleted,
         searchValue,
