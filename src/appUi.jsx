@@ -9,8 +9,11 @@ import { TodoTask } from "./components/to-do/task/task";
 import { CreateTaskBtn } from "./components/to-do/create-task/create-task";
 import { EmptyTodo } from "./components/to-do/empty-todo/empty-todo";
 import { ErrorTab } from "./error-message";
+import { TaskForm } from "./components/to-do/task-form";
+import { Meta } from "./components/to-do/meta";
+
 function AppUi() {
-  const { loading, emptyTodoList, searchValue, tasks, getError } =
+  const { loading, emptyTodoList, searchValue, tasks, getError, showModal, setShowModal } =
     useContext(TaskContext);
 
   return (
@@ -50,7 +53,11 @@ function AppUi() {
             ))}
         </TaskList>
       </section>
-
+      {showModal && (
+        <Meta>
+          <TaskForm />
+        </Meta>
+      )}
       {getError() && <ErrorTab />}
     </main>
   );

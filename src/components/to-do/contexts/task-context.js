@@ -23,6 +23,7 @@ export function TaskProvider({ children }) {
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
   const emptyTodoList = Array(5).fill(null);
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     if (tasks) {
@@ -48,6 +49,8 @@ export function TaskProvider({ children }) {
         getTasks,
         getError,
         setErrorState,
+        showModal,
+        setShowModal
       }}
     >
       {children}

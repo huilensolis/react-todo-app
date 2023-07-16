@@ -19,7 +19,9 @@ function App() {
     getTasks,
     getError,
     setErrorState,
-    setTaskCompleted
+    setTaskCompleted,
+    showModal,
+    setShowModal
   } = useContext(TaskContext);
 
   // tasks logic
@@ -36,37 +38,39 @@ function App() {
     setLoading(true);
 
     setTimeout(() => {
-      setLoading(false);
       if (searchValue.length > 0) {
         setTasks(tasksSearched);
-      } else{
-        setTasks(getTasks())
+      } else {
+        setTasks(getTasks());
       }
+      setLoading(false);
     }, 1000);
-  }, [searchValue]);
+  }, [searchValue, setTasks, setLoading]);
 
   return (
-    <TaskContext.Provider value={{
-      loading,
-      setLoading,
-      tasks,
-      setTasks,
-      totalTasks,
-      taskCompleted,
-      setTaskCompleted,
-      searchValue,
-      setSearchValue,
-      emptyTodoList,
-      saveTasksToLocalStorage,
-      getTasks,
-      getError,
-      setErrorState,
-    }}>
-      <AppUi
-        emptyTodoList={emptyTodoList}
-      />
+    <TaskContext.Provider
+      value={{
+        loading,
+        setLoading,
+        tasks,
+        setTasks,
+        totalTasks,
+        taskCompleted,
+        setTaskCompleted,
+        searchValue,
+        setSearchValue,
+        emptyTodoList,
+        saveTasksToLocalStorage,
+        getTasks,
+        getError,
+        setErrorState,
+        showModal,
+        setShowModal
+      }}
+    >
+      <AppUi />
     </TaskContext.Provider>
-    );
+  );
 }
 
 export default App;

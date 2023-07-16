@@ -1,0 +1,68 @@
+.task-form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: whitesmoke;
+  padding: 50px;
+  width: clamp(300px, 40vw, 70vw);
+  height: clamp(600px, 70vh, 80vw);
+  border-radius: 12px;
+  gap: 10px;
+}
+label {
+  color: #4043c9;
+  font-size: 1.5rem;
+}
+.input-section{
+    height: auto;
+    width: 100%;
+    padding: 0;
+}
+.task-input {
+  width: 100%;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 5px;
+  background-color: transparent;
+  border: 2px solid #4043c9;
+  color: #4043c9;
+  transition: 0.5s;
+  font-size: 1rem;
+  padding: 1rem;
+}
+.task-input::placeholder {
+  color: #8c8dbd;
+}
+.task-input:focus {
+  background-color: #ffffff;
+  border-color: #4043c9;
+  color: #4043c9;
+}
+.task-input:focus,
+.task-input:focus-visible {
+  outline: 2px solid #4043c9;
+}
+.buttons-section {
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: space-around;
+}
+.task-button {
+  padding: 10px 30px;
+  width: 100%;
+  font-weight: 600;
+  border-radius: 12px;
+  background-color: #4043c9;
+  color: white;
+  font-size: 1rem;
+  transition: 0.5s;
+  border: 2px solid transparent;
+}
+.task-button.cancel {
+  background-color: #d45e5e;
+}
