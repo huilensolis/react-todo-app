@@ -46,7 +46,7 @@ function App() {
         setTasks(getTasks());
       }
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, [searchValue]);
 
   return (
