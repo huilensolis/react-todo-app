@@ -9,7 +9,7 @@ function TodoTask({ title, id, completed }) {
 
   const { getTasks, saveTasksToLocalStorage, setTasks } = useContext(TaskContext)
 
-  function completeTask(id) {
+  function completeTask() {
     const taskIndex = getTasks().findIndex((task) => task.id === id);
 
     if (taskIndex >= 0) {
@@ -29,7 +29,8 @@ function TodoTask({ title, id, completed }) {
     }
   }
 
-  function deleteTask(id) {
+  function deleteTask() {
+    return
     const indexOfTask = getTasks().findIndex(
       (task) => task.title === id
     );
@@ -50,21 +51,21 @@ function TodoTask({ title, id, completed }) {
   }
   return (
     <li className={isHovering === title ? "maybe-delete-background-red" : ""}>
-       <CheckIcon
+      <CheckIcon
         className="completed-task-icon icon"
-        onClick={() => completeTask(id)}
+        onClick={completeTask}
       />
-       <main className="task-container">
-         <h1
-           className={`task-title ${completed === true ? "task-completed" : ""}`}
-         >
-           {title}
-         </h1>
-       </main>
-       <CloseIcon
-         className="delete-task-icon icon" onClick={() => deleteTask(id)} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave}
-       />
-     </li>
+      <main className="task-container">
+        <h1
+          className={`task-title ${completed === true ? "task-completed" : ""}`}
+        >
+          {title}
+        </h1>
+      </main>
+      <CloseIcon
+        className="delete-task-icon icon" onClick={deleteTask} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave}
+      />
+    </li>
   );
 }
 

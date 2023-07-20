@@ -23,8 +23,16 @@ export function TaskProvider({ children }) {
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false)
-  const [maxId, setmaxId] = useState(0)
-  
+  const [maxId, setmaxId] = useState(() => {
+    if (tasks.length > 0) {
+      const ids = tasks.map(task => task.id)
+      console.log(ids);
+      return Math.max(...ids)
+    } else {
+      return 0
+    }
+  })
+
   const emptyTodoList = Array(5).fill(null);
 
   useEffect(() => {
@@ -32,6 +40,7 @@ export function TaskProvider({ children }) {
       setTaskCompleted(tasks.filter((task) => task.completed).length);
       setTotalTasks(tasks.length);
       saveTasksToLocalStorage(tasks)
+      console.log(maxId);
     }
   }, [tasks]);
 
@@ -40,20 +49,20 @@ export function TaskProvider({ children }) {
     event.preventDefault()
     if (!textAreaValue) return
     try {
-        const newTaskList = [...tasks, {
-            title: textAreaValue,
-            id: maxId + 1,
-            completed: false,
-        }]
-        setmaxId(maxId + 1)
-        setTasks(newTaskList)
+      const newTaskList = [...tasks, {
+        title: textAreaValue,
+        id: (maxId + 1),
+        completed: false,
+      }]
+      setmaxId(maxId + 1)
+      setTasks(newTaskList)
     } catch (error) {
-        console.log(error);
-        setErrorState('there is been an error, please try again.')
-    } finally{
-        setShowModal(false)
+      console.log(error);
+      setErrorState('there is been an error, please try again.')
+    } finally {
+      setShowModal(false)
     }
-}
+  }
 
   return (
     <TaskContext.Provider

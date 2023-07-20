@@ -46,6 +46,7 @@ function AppUi() {
             tasks.map((task) => (
               <TodoTask
                 title={task.title}
+                id={task.id}
                 key={task.id}
                 completed={task.completed}
               />
