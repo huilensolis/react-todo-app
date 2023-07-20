@@ -30,9 +30,8 @@ function TodoTask({ title, id, completed }) {
   }
 
   function deleteTask() {
-    return
     const indexOfTask = getTasks().findIndex(
-      (task) => task.title === id
+      task => task.id === id
     );
     const newTasksArray = [...getTasks()];
     newTasksArray.splice(indexOfTask, 1);
