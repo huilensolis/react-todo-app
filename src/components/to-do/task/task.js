@@ -15,13 +15,6 @@ function TodoTask({ title, id, completed }) {
     if (taskIndex >= 0) {
       const newTaskList = [...getTasks()];
       newTaskList[taskIndex].completed = !newTaskList[taskIndex].completed;
-      newTaskList.sort((task1, task2) => {
-        if (!task1.completed && task2.completed) {
-          return -2;
-        } else {
-          return 0;
-        }
-      });
       saveTasksToLocalStorage(newTaskList);
       setTasks(newTaskList);
     } else {
