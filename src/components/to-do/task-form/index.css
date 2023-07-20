@@ -6,13 +6,12 @@
   background-color: whitesmoke;
   padding: 50px;
   width: clamp(300px, 40vw, 70vw);
-  height: clamp(600px, 70vh, 80vw);
   border-radius: 12px;
   gap: 10px;
 }
 label {
   color: #4043c9;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 .input-section{
     height: auto;
@@ -21,7 +20,7 @@ label {
 }
 .task-input {
   width: 100%;
-  font-weight: 600;
+  height: 7rem;
   border-radius: 12px;
   padding: 5px;
   background-color: transparent;
@@ -29,19 +28,16 @@ label {
   color: #4043c9;
   transition: 0.5s;
   font-size: 1rem;
-  padding: 1rem;
+  padding: 0.6rem;
+  outline: 3px solid transparent;
 }
 .task-input::placeholder {
   color: #8c8dbd;
 }
-.task-input:focus {
-  background-color: #ffffff;
-  border-color: #4043c9;
-  color: #4043c9;
-}
 .task-input:focus,
 .task-input:focus-visible {
-  outline: 2px solid #4043c9;
+  outline: 3px solid #6365d5;
+  border-color: transparent;
 }
 .buttons-section {
   padding: 0;

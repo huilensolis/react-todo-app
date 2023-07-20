@@ -1,13 +1,13 @@
 import "./styles.css";
 import { useState } from "react";
-import {CheckIcon, CloseIcon} from '../../../svg/bs/index'
+import { CheckIcon, CloseIcon } from '../../../svg/bs/index'
 
 import { useContext } from "react";
 import { TaskContext } from "../contexts/task-context";
 
 function TodoTask({ title, id, completed }) {
 
-  const {getTasks, saveTasksToLocalStorage, setTasks} = useContext(TaskContext)
+  const { getTasks, saveTasksToLocalStorage, setTasks } = useContext(TaskContext)
 
   function completeTask(id) {
     const taskIndex = getTasks().findIndex((task) => task.id === id);
@@ -41,31 +41,30 @@ function TodoTask({ title, id, completed }) {
 
   const [isHovering, setIsHovering] = useState(null)
 
-  function handleMouseEnter(title){
+  function handleMouseEnter(title) {
     setIsHovering(title)
   }
 
-  function handleMouseLeave(){
+  function handleMouseLeave() {
     setIsHovering(null)
   }
   return (
     <li className={isHovering === title ? "maybe-delete-background-red" : ""}>
-      <CheckIcon 
+       <CheckIcon
         className="completed-task-icon icon"
-        onClick={()  => completeTask(id)}
+        onClick={() => completeTask(id)}
       />
-
-      <main className="task-container">
-        <h1
-          className={`task-title ${completed === true ? "task-completed" : ""}`}
-        >
-          {title}
-        </h1>
-      </main>
-      <CloseIcon
-        className="delete-task-icon icon" onClick={deleteTask(id)} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave} 
-      />
-    </li>
+       <main className="task-container">
+         <h1
+           className={`task-title ${completed === true ? "task-completed" : ""}`}
+         >
+           {title}
+         </h1>
+       </main>
+       <CloseIcon
+         className="delete-task-icon icon" onClick={() => deleteTask(id)} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave}
+       />
+     </li>
   );
 }
 

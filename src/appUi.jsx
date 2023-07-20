@@ -13,7 +13,7 @@ import { TaskForm } from "./components/to-do/task-form";
 import { Meta } from "./components/to-do/meta";
 
 function AppUi() {
-  const { loading, emptyTodoList, searchValue, tasks, getError, showModal, setShowModal } =
+  const { loading, emptyTodoList, searchValue, tasks, getError, showModal } =
     useContext(TaskContext);
 
   return (
@@ -47,7 +47,6 @@ function AppUi() {
               <TodoTask
                 title={task.title}
                 key={task.id}
-                id={task.id}
                 completed={task.completed}
               />
             ))}

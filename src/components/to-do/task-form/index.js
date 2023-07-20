@@ -1,31 +1,22 @@
-import { useContext, useId } from "react"
+import { useContext, useId, useState } from "react"
 import { TaskContext } from "../contexts/task-context"
 import './index.css'
 export function TaskForm() {
 
-    const { setShowModal, tasks, setTasks, setErrorState } = useContext(TaskContext)
+    const { setShowModal, setErrorState, setmaxId, setTasks, tasks, maxId, onSubmit } = useContext(TaskContext)
+    const [textAreaValue, seTtextAreaValue] = useState(null)
 
-    function createTask() {
-        try {
-
-        } catch (error) {
-            setErrorState('there is been an error, please try again.')
-        } finally {
-            setShowModal(false)
-        }
-    }
-
-    const taskInput = useId()
+    const taskInputId = useId()
 
     return (
-        <form className="task-form">
+        <form className="task-form" onSubmit={(e) => onSubmit(e, textAreaValue)}>
             <section className="input-section">
-                <label htmlFor={taskInput}>Task name</label>
-                <input type="text" placeholder="Enter task" id={taskInput} className="task-input" />
+                <label htmlFor={taskInputId}>Task name</label>
+                <textarea type="text" placeholder="Enter task" id={taskInputId} onChange={(e) => seTtextAreaValue(e.target.value)} className="task-input" />
             </section>
             <section className="buttons-section">
                 <button type="button" onClick={() => setShowModal(false)} className="task-button cancel">cancel</button>
-                <button type="button" onClick={createTask} className="task-button">save</button>
+                <button type="submit" className="task-button">save</button>
             </section>
         </form>
     )

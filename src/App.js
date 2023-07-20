@@ -21,7 +21,9 @@ function App() {
     setErrorState,
     setTaskCompleted,
     showModal,
-    setShowModal
+    setShowModal,
+    maxId, setmaxId,
+    onSubmit
   } = useContext(TaskContext);
 
   // tasks logic
@@ -45,12 +47,13 @@ function App() {
       }
       setLoading(false);
     }, 1000);
-  }, [searchValue, setTasks, setLoading]);
+  }, [searchValue]);
 
   return (
     <TaskContext.Provider
       value={{
         loading,
+        onSubmit,
         setLoading,
         tasks,
         setTasks,
@@ -65,7 +68,8 @@ function App() {
         getError,
         setErrorState,
         showModal,
-        setShowModal
+        setShowModal,
+        maxId, setmaxId
       }}
     >
       <AppUi />
