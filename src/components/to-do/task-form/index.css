@@ -8,6 +8,16 @@
   width: clamp(300px, 40vw, 70vw);
   border-radius: 12px;
   gap: 10px;
+  animation: 0.3s traslucid ease-in-out ;
+}
+@keyframes traslucid{
+  from{
+    opacity: 0;
+    transform: translateY(-20px);
+  } to{
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 label {
   color: #4043c9;
