@@ -12,7 +12,7 @@ export function TaskForm() {
         <form className="task-form" onSubmit={(e) => onSubmit(e, textAreaValue)}>
             <section className="input-section">
                 <label htmlFor={taskInputId}>Task name</label>
-                <textarea type="text" placeholder="Enter task" id={taskInputId} onChange={(e) => seTtextAreaValue(e.target.value)} className="task-input" />
+                <textarea type="text" autoFocus placeholder="Enter task" id={taskInputId} onChange={(e) => seTtextAreaValue(e.target.value)} className="task-input" />
             </section>
             <section className="buttons-section">
                 <button type="button" onClick={() => setShowModal(false)} className="task-button cancel">cancel</button>

@@ -39,8 +39,6 @@ export function TaskProvider({ children }) {
     if (tasks) {
       setTaskCompleted(tasks.filter((task) => task.completed).length);
       setTotalTasks(tasks.length);
-      saveTasksToLocalStorage(tasks)
-      console.log(maxId);
     }
   }, [tasks]);
 
@@ -56,6 +54,7 @@ export function TaskProvider({ children }) {
       }]
       setmaxId(maxId + 1)
       setTasks(newTaskList)
+      saveTasksToLocalStorage(newTaskList)
     } catch (error) {
       console.log(error);
       setErrorState('there is been an error, please try again.')
