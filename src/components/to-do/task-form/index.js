@@ -3,7 +3,7 @@ import { TaskContext } from "../contexts/task-context"
 import './index.css'
 export function TaskForm() {
 
-    const { setShowModal, setErrorState, setmaxId, setTasks, tasks, maxId, onSubmit } = useContext(TaskContext)
+    const { setShowModal, onSubmit } = useContext(TaskContext)
     const [textAreaValue, seTtextAreaValue] = useState(null)
 
     const taskInputId = useId()

@@ -1,7 +1,7 @@
 {
   "name": "platzi-intro-react-base",
   "version": "0.1.0",
-  "homepage": "https://Huilensolis.github.io/react-todo-app",
+  "homepage": ".",
   "dependencies": {
     "react": "^18",
     "react-dom": "^18",
