@@ -7,7 +7,8 @@
   outline: none;
 }
 *:focus-visible{
-  outline: 4px solid #bf7add;
+  outline: 4px solid #8896e2;
+  border: 4px solid rgb(255, 255, 255);
 }
 .main-container{
   display: grid;
