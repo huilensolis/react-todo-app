@@ -12,13 +12,14 @@ function Nav() {
   }
 
   return (
-    <nav className="task-nav">
+    <nav className="task-nav" tabIndex={0}>
       <MagnifyIcon className="search-icon" />
       <input
         type="text"
         className="input-search"
         placeholder="search"
         onChange={(event) => serachTask(event)}
+        tabIndex={0}
       />
     </nav>
   );

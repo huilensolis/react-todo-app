@@ -1,4 +1,4 @@
-import "./App.css";
+import "./AppUi.css";
 import { useContext } from "react";
 import { TaskContext } from "./components/to-do/contexts/task-context";
 // components
@@ -18,17 +18,16 @@ function AppUi() {
 
   return (
     <main className="main-container">
-      <section className="aside-section">
-        <div className="child-1">
-          <h1 id="title">Todo-List</h1>
-          <CompletedTaskCount />
+      <aside className="aside-section">
+        <header className="child-1">
+          <h1 id="title" tabIndex={0}>TODO LIST</h1>
           <Nav />
-        </div>
-
-        <div className="child-2">
+          <CompletedTaskCount />
+        </header>
+        <section className="child-2">
           <CreateTaskBtn class="createTaskBtn" />
-        </div>
-      </section>
+        </section>
+      </aside>
 
       <section className="task-section">
         <TaskList>

@@ -1,52 +1,47 @@
-.error{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0000008b;
-
-    transition: 1s;
-  }
-  .error header{
-    width: clamp(20%, 50%, 80%);
-    height: clamp(20%, 50%, 80%);
-    background-color: whitesmoke;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 1s;
-  }
-  .error header figure{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .error header figure button{
-    background-color: red;
-    font-size: 2rem;
-    padding: 5px 20px;
-    color: whitesmoke;
-    border-radius: 0 12px 0 12px;
-    cursor: pointer;
-    transition: 0.5s;
-  }
-  .error header figure button:hover{
-    background-color: rgb(252, 98, 98);
-  }
-  .error header p{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    font-weight: 600;
-    font-size: 2rem;
-  }
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: 100vw;
+  background-color: #0000008b;
+  transition: 0.7s;
+}
+.error-article {
+  width: 400px;
+  min-height: 200px;
+  height: min-content;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+  gap: 10px;
+}
+.error-article p {
+  border-radius: 12px;
+  padding: 10px;
+  background-color: #e1e1e1;
+}
+.close-button {
+  border-radius: 12px;
+  padding: 10px 20px;
+  width: max-content;
+  background-color: #4043C9;
+  color: white;
+  transition: 0.5s;
+}
+.close-button:hover{
+  filter: brightness(110%);
+}
+.button-section{
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}

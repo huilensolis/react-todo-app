@@ -5,28 +5,8 @@ import { AppUi } from "./appUi";
 // custom hooks
 import { TaskContext } from "./components/to-do/contexts/task-context";
 function App() {
-  const {
-    loading,
-    setLoading,
-    tasks,
-    setTasks,
-    totalTasks,
-    taskCompleted,
-    searchValue,
-    setSearchValue,
-    emptyTodoList,
-    saveTasksToLocalStorage,
-    getTasks,
-    getError,
-    setErrorState,
-    setTaskCompleted,
-    showModal,
-    setShowModal,
-    maxId, setmaxId,
-    onSubmit
-  } = useContext(TaskContext);
-
-  // tasks logic
+  const { getTasks, searchValue, setTasks, setLoading, setErrorState } =
+    useContext(TaskContext);
 
   // search logic
   const tasksSearched = getTasks().filter((task) => {
@@ -49,32 +29,7 @@ function App() {
     }, 500);
   }, [searchValue]);
 
-  return (
-    <TaskContext.Provider
-      value={{
-        loading,
-        onSubmit,
-        setLoading,
-        tasks,
-        setTasks,
-        totalTasks,
-        taskCompleted,
-        setTaskCompleted,
-        searchValue,
-        setSearchValue,
-        emptyTodoList,
-        saveTasksToLocalStorage,
-        getTasks,
-        getError,
-        setErrorState,
-        showModal,
-        setShowModal,
-        maxId, setmaxId
-      }}
-    >
-      <AppUi />
-    </TaskContext.Provider>
-  );
+  return <AppUi />;
 }
 
 export default App;

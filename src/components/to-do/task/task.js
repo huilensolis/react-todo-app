@@ -1,13 +1,13 @@
 import "./styles.css";
 import { useState } from "react";
-import { CheckIcon, CloseIcon } from '../../../svg/bs/index'
+import { CheckIcon, CloseIcon } from "../../../svg/bs/index";
 
 import { useContext } from "react";
 import { TaskContext } from "../contexts/task-context";
 
 function TodoTask({ title, id, completed }) {
-
-  const { getTasks, saveTasksToLocalStorage, setTasks } = useContext(TaskContext)
+  const { getTasks, saveTasksToLocalStorage, setTasks } =
+    useContext(TaskContext);
 
   function completeTask() {
     const taskIndex = getTasks().findIndex((task) => task.id === id);
@@ -23,40 +23,44 @@ function TodoTask({ title, id, completed }) {
   }
 
   function deleteTask() {
-    const indexOfTask = getTasks().findIndex(
-      task => task.id === id
-    );
+    const indexOfTask = getTasks().findIndex((task) => task.id === id);
     const newTasksArray = [...getTasks()];
     newTasksArray.splice(indexOfTask, 1);
     saveTasksToLocalStorage(newTasksArray);
     setTasks(newTasksArray);
   }
 
-  const [isHovering, setIsHovering] = useState(null)
+  const [isHovering, setIsHovering] = useState(null);
 
   function handleMouseEnter(title) {
-    setIsHovering(title)
+    setIsHovering(title);
   }
 
   function handleMouseLeave() {
-    setIsHovering(null)
+    setIsHovering(null);
   }
   return (
-    <li className={isHovering === title ? "maybe-delete-background-red" : ""}>
-      <CheckIcon
-        className="completed-task-icon icon"
-        onClick={completeTask}
-      />
-      <main className="task-container">
-        <h1
-          className={`task-title ${completed === true ? "task-completed" : ""}`}
-        >
+    <li
+      className={isHovering === title ? "maybe-delete-background-red" : ""}
+      tabIndex={0}
+    >
+      <article className="task-container" tabIndex={0}>
+        <CheckIcon
+          className="completed-task-icon icon"
+          onClick={completeTask}
+          tabIndex={0}
+        />
+        <p className={completed === true ? "task-completed" : ""} tabIndex={0}>
           {title}
-        </h1>
-      </main>
-      <CloseIcon
-        className="delete-task-icon icon" onClick={deleteTask} onMouseEnter={() => handleMouseEnter(title)} onMouseLeave={handleMouseLeave}
-      />
+        </p>
+        <CloseIcon
+          className="delete-task-icon icon"
+          onClick={deleteTask}
+          onMouseEnter={() => handleMouseEnter(title)}
+          onMouseLeave={handleMouseLeave}
+          tabIndex={0}
+        />
+      </article>
     </li>
   );
 }

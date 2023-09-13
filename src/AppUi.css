@@ -6,6 +6,9 @@
   border: none;
   outline: none;
 }
+*:focus-visible{
+  outline: 4px solid #bf7add;
+}
 .main-container{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -17,21 +20,16 @@
   border-radius: 12px;
   box-shadow: 1px 0px 20px 8px #4042c95d;
 }
-section{
-  padding: 10px;
-  height: 100%;
-  width: 100%;
-}
 .child-1, .child-2{
   width: 100%;
 }
 .child-1{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  /* height: 100%; */
   gap: 10px;
+  height: 100%;
 }
 .aside-section{
   display: flex;
@@ -41,16 +39,21 @@ section{
   gap: 10px;
   background-color: #4043C9;
   border-radius: 12px 0 0 12px;
+  padding: 10px;
+  height: 100%;
 }
-#title{
-  font-size: 3rem;
+h1{
+  font-size: 2.5rem;
   color: #E3E3E3;
   text-align: center;
+  font-weight: 600;
 }
 .task-section{
   border-radius: 0 12px 12px 0;
   background-color: #FFFFFF;
   overflow: auto;
+  padding: 10px;
+  height: 100%;
 }
 
 @media (width < 1000px){

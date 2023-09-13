@@ -3,35 +3,34 @@ import { TaskContext } from "../contexts/task-context";
 import { useContext } from "react";
 
 function CompletedTaskCount() {
-  const { totalTask, taskCompleted } =
-    useContext(TaskContext);
+  const { totalTasks, taskCompleted } = useContext(TaskContext);
 
   function taskOrTasks() {
-    if (totalTask > 1) {
+    if (totalTasks > 1) {
       return "tasks";
     } else {
       return "task";
     }
   }
+  console.log({ taskCompleted, totalTasks });
   return (
     <>
-      <header>
-        {taskCompleted === totalTask && totalTask > 0 && (
-          <h1 className="count-h1">
-            Good job! 👏 <br /> You have completed all your tasks for today
-          </h1>
-        )}
-        {totalTask === 0 && (
-          <h1 className="count-h1">
-            it looks a kinda empty here 🐻 <br /> Try creating some new tasks!
-          </h1>
-        )}
-        {!taskCompleted === totalTask && !totalTask === 0 && (
-          <h1 className="count-h1">
-            you have compelte <br /> {taskCompleted} of {taskOrTasks()}
-          </h1>
-        )}
-      </header>
+      {taskCompleted === totalTasks && totalTasks > 0 && (
+        <h2 className="count-h2" tabIndex={0}>
+          Good job! 👏 <br /> You have completed all your tasks for today
+        </h2>
+      )}
+      {totalTasks === 0 && (
+        <h2 className="count-h2" tabIndex={0}>
+          it looks a kinda empty here <span className="no-italic">🐻</span> <br /> Try creating some
+          new tasks!
+        </h2>
+      )}
+      {taskCompleted !== totalTasks && totalTasks !== 0 && (
+        <h2 className="count-h2" tabIndex={0}>
+          you have compelte <br /> {taskCompleted} of {taskOrTasks()}
+        </h2>
+      )}
     </>
   );
 }

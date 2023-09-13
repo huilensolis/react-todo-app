@@ -9,13 +9,15 @@ export function ErrorTab() {
     setErrorState(false);
   }
   return (
-    <main className="error">
-      <header>
-        <figure>
-          <button onClick={closeErrorTab}>x</button>
-        </figure>
-        <p>{getError()}</p>
-      </header>
-    </main>
+    <div className="error" tabIndex={0}>
+      <article className="error-article" tabIndex={0}>
+        <p tabIndex={0}>{getError()}</p>
+        <section className="button-section" tabIndex={0}>
+          <button onClick={closeErrorTab} className="close-button" tabIndex={0}>
+            Close
+          </button>
+        </section>
+      </article>
+    </div>
   );
 }
